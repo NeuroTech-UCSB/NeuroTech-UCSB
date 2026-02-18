@@ -56,7 +56,7 @@ export default function Navbar() {
           </Link>
           {/* Dropdown menu */}
           <div className="absolute left-0 top-full hidden group-hover:block bg-gray-700 min-w-[180px]">
-            <Link href="/conference/cntc" className="block px-4 py-2 text-white hover:bg-gray-600">
+            <Link href="/conference/CNTC" className="block px-4 py-2 text-white hover:bg-gray-600">
               CNTC
             </Link>
           </div>
