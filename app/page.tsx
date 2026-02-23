@@ -6,7 +6,10 @@ export default function Home() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--dark-bg)] via-[var(--primary-dark)] to-[var(--primary)]" />
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to bottom right, var(--dark-bg), var(--primary-dark), var(--primary))" }}
+      />
 
       {/* Decorative grid */}
       <div
@@ -25,12 +28,12 @@ export default function Home() {
 
       {/* Floating glow orbs */}
       <div
-        className="absolute top-1/4 -left-32 w-96 h-96 bg-[var(--primary)] rounded-full blur-[128px]"
-        style={{ opacity: 0.3, animation: "float-1 18s ease-in-out infinite" }}
+        className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-[128px]"
+        style={{ backgroundColor: "var(--primary)", opacity: 0.3, animation: "float-1 18s ease-in-out infinite" }}
       />
       <div
-        className="absolute bottom-1/4 -right-32 w-80 h-80 bg-[var(--accent)] rounded-full blur-[128px]"
-        style={{ opacity: 0.15, animation: "float-2 22s ease-in-out infinite" }}
+        className="absolute bottom-1/4 -right-32 w-80 h-80 rounded-full blur-[128px]"
+        style={{ backgroundColor: "var(--accent)", opacity: 0.15, animation: "float-2 22s ease-in-out infinite" }}
       />
 
       {/* Content */}
@@ -40,7 +43,7 @@ export default function Home() {
           <FadeIn delay={200}>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight uppercase">
               NEUROTECH<br />
-              <span className="text-[var(--accent)]">@</span> UCSB
+              <span style={{ color: "var(--accent)" }}>@</span> UCSB
             </h1>
           </FadeIn>
           <FadeIn delay={500}>
@@ -52,7 +55,8 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <Link
                 href="/apply"
-                className="bg-[var(--accent)] text-[var(--dark-bg)] px-8 py-3.5 rounded-full font-semibold text-sm uppercase hover:brightness-110 hover:scale-105 transition-all duration-200 shadow-lg shadow-[var(--accent)]/20"
+                className="px-8 py-3.5 rounded-full font-semibold text-sm uppercase hover:brightness-110 hover:scale-105 transition-all duration-200"
+                style={{ backgroundColor: "var(--accent)", color: "var(--dark-bg)" }}
               >
                 JOIN US
               </Link>
