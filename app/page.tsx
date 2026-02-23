@@ -1,5 +1,78 @@
+import Link from "next/link";
+import NeuralBackground from "./components/neural-background";
+import FadeIn from "./components/fade-in";
+
 export default function Home() {
   return (
-    <div className="starter"> Hello World!</div>
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--dark-bg)] via-[var(--primary-dark)] to-[var(--primary)]" />
+
+      {/* Decorative grid */}
+      <div
+        className="absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Neural network particle background */}
+      <NeuralBackground />
+
+      {/* Floating glow orbs */}
+      <div
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-[var(--primary)] rounded-full blur-[128px]"
+        style={{ opacity: 0.3, animation: "float-1 18s ease-in-out infinite" }}
+      />
+      <div
+        className="absolute bottom-1/4 -right-32 w-80 h-80 bg-[var(--accent)] rounded-full blur-[128px]"
+        style={{ opacity: 0.15, animation: "float-2 22s ease-in-out infinite" }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        {/* Left — text */}
+        <div className="flex-1 text-left">
+          <FadeIn delay={200}>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight uppercase">
+              NEUROTECH<br />
+              <span className="text-[var(--accent)]">@</span> UCSB
+            </h1>
+          </FadeIn>
+          <FadeIn delay={500}>
+            <p className="text-lg md:text-xl text-white/70 mb-10 leading-relaxed max-w-lg">
+              Bridging neuroscience and engineering. We design, build, and experiment with brain-computer interfaces and neurotechnology.
+            </p>
+          </FadeIn>
+          <FadeIn delay={800}>
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              <Link
+                href="/apply"
+                className="bg-[var(--accent)] text-[var(--dark-bg)] px-8 py-3.5 rounded-full font-semibold text-sm uppercase hover:brightness-110 hover:scale-105 transition-all duration-200 shadow-lg shadow-[var(--accent)]/20"
+              >
+                JOIN US
+              </Link>
+              <Link
+                href="/about"
+                className="border border-white/20 text-white px-8 py-3.5 rounded-full font-semibold text-sm uppercase hover:bg-white/10 hover:border-white/40 transition-all duration-200"
+              >
+                LEARN MORE
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+
+        {/* Right — placeholder logo */}
+        <FadeIn delay={400} className="flex-1 flex items-center justify-center">
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl border-2 border-dashed border-white/20 flex items-center justify-center bg-white/5">
+            <span className="text-white/30 text-sm font-medium">Logo Here</span>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
   );
 }
