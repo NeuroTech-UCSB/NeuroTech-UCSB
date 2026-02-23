@@ -102,24 +102,27 @@ export default function Navbar() {
 
           {/* Conference Dropdown */}
           <div className="relative group">
-            <Link
-              href="/conference"
-              className="text-gray-200 hover:text-white transition-colors duration-200"
-            >
-              Conference
-            </Link>
+          <Link
+            href="/conference"
+            className="text-gray-200 hover:text-white transition-colors duration-200"
+          >
+            Conference
+          </Link>
 
-            <div className="absolute left-0 top-full hidden group-hover:block z-50 pt-2">
-              <div className="bg-gray-700 min-w-[200px] rounded-md shadow-lg overflow-hidden">
-                <Link
-                  href="/conference/CNTC"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  CNTC
-                </Link>
-              </div>
+          {/* hover buffer wrapper + keep-open-on-hover */}
+          <div className="absolute left-0 top-full hidden group-hover:block hover:block z-50 pt-2">
+            <div className="bg-gray-700 min-w-[200px] rounded-md shadow-lg overflow-hidden">
+              <a
+                href="http://cntc-2026.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
+              >
+                CNTC (2026)
+              </a>
             </div>
           </div>
+        </div>
 
           {/* Apply */}
           <Link
