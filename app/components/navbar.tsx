@@ -4,21 +4,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-const accentHover = "hover:text-accent";
+const linkClass = "text-primary/80 hover:text-primary transition-colors duration-200 text-base font-medium tracking-wide";
 
 function DropdownMenu({ label, href, items }: { label: string; href: string; items: { name: string; href: string }[] }) {
   return (
     <div className="relative group">
-      <Link href={href} className={`text-white/90 ${accentHover} transition-colors duration-200 text-base font-medium tracking-wide`}>
+      <Link href={href} className={linkClass}>
         {label}
       </Link>
       <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
-        <div className="bg-card-bg border border-white/10 rounded-lg min-w-[200px] py-1 shadow-xl shadow-black/30">
+        <div className="bg-white border border-primary/10 rounded-lg min-w-[200px] py-1 shadow-xl shadow-primary/10">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`block px-4 py-2.5 text-sm text-white/80 ${accentHover} hover:bg-white/5 transition-colors duration-150`}
+              className="block px-4 py-2.5 text-sm text-primary/70 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
             >
               {item.name}
             </Link>
@@ -33,19 +33,19 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/10"
-      style={{ backgroundColor: "rgba(10, 17, 40, 0.1)" }}
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-primary/10"
+      style={{ backgroundColor: "rgba(255, 255, 255, 0.95)" }}
     >
-      <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+      <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="transition-opacity hover:opacity-80">
-          <Image src="/Neurotech@ucsb.png" alt="NeuroTech @ UCSB" width={160} height={40} className="h-10 w-auto" />
+          <Image src="/neurotech-ucsb-logo.png" alt="NeuroTech @ UCSB" width={60} height={60} className="h-12 md:h-16 w-auto object-contain" />
         </Link>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`md:hidden text-white/80 ${accentHover} transition-colors`}
+          className="md:hidden text-primary/70 hover:text-primary transition-colors"
           aria-label="Toggle menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,7 +59,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/about" className={`text-white/90 ${accentHover} transition-colors duration-200 text-base font-medium tracking-wide`}>
+          <Link href="/about" className={linkClass}>
             About
           </Link>
           <DropdownMenu
@@ -89,7 +89,7 @@ export default function Navbar() {
           />
           <Link
             href="/apply"
-            className="bg-accent text-dark-bg px-5 py-2 rounded-full text-base font-semibold hover:brightness-110 transition-all duration-200"
+            className="bg-primary text-white px-5 py-2 rounded-full text-base font-semibold hover:bg-primary-dark transition-all duration-200"
           >
             Apply
           </Link>
@@ -98,14 +98,14 @@ export default function Navbar() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/10 px-6 py-4 space-y-3" style={{ backgroundColor: "var(--dark-bg)" }}>
-          <Link href="/about" className={`block text-white/80 ${accentHover} transition-colors text-sm`} onClick={() => setMobileOpen(false)}>About</Link>
-          <Link href="/projects" className={`block text-white/80 ${accentHover} transition-colors text-sm`} onClick={() => setMobileOpen(false)}>Projects</Link>
-          <Link href="/publications" className={`block text-white/80 ${accentHover} transition-colors text-sm`} onClick={() => setMobileOpen(false)}>Publications</Link>
-          <Link href="/conference" className={`block text-white/80 ${accentHover} transition-colors text-sm`} onClick={() => setMobileOpen(false)}>Conference</Link>
+        <div className="md:hidden border-t border-primary/10 px-6 py-4 space-y-3 bg-white">
+          <Link href="/about" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>About</Link>
+          <Link href="/projects" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Projects</Link>
+          <Link href="/publications" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Publications</Link>
+          <Link href="/conference" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Conference</Link>
           <Link
             href="/apply"
-            className="inline-block bg-accent text-dark-bg px-5 py-2 rounded-full text-sm font-semibold hover:brightness-110 transition-all"
+            className="inline-block bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all"
             onClick={() => setMobileOpen(false)}
           >
             Apply

@@ -43,7 +43,7 @@ export default function NeuralBackground() {
           y: Math.random() * h,
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 1.5 + 0.5,
+          radius: Math.random() * 2 + 1,
         });
       }
     }
@@ -68,7 +68,7 @@ export default function NeuralBackground() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+        ctx.fillStyle = "rgb(252, 190, 95)";
         ctx.fill();
       }
 
@@ -84,7 +84,7 @@ export default function NeuralBackground() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.15})`;
+            ctx.strokeStyle = `rgba(12, 60, 110, ${opacity * 0.3})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
