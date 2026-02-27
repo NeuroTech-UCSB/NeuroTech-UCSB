@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const accentHover = "hover:text-accent";
@@ -36,9 +37,9 @@ export default function Navbar() {
       style={{ backgroundColor: "rgba(10, 17, 40, 0.1)" }}
     >
       <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-        {/* Brand */}
-        <Link href="/" className={`text-white font-bold text-xl tracking-tight ${accentHover} transition-colors`}>
-          NeuroTech @ UCSB
+        {/* Logo */}
+        <Link href="/" className="transition-opacity hover:opacity-80">
+          <Image src="/Neurotech@ucsb.png" alt="NeuroTech @ UCSB" width={160} height={40} className="h-10 w-auto" />
         </Link>
 
         {/* Mobile toggle */}

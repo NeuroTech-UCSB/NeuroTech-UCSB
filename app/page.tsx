@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import NeuralBackground from "./components/neural-background";
 import FadeIn from "./components/fade-in";
 
@@ -70,11 +71,9 @@ export default function Home() {
           </FadeIn>
         </div>
 
-        {/* Right — placeholder logo */}
+        {/* Right — logo */}
         <FadeIn delay={400} className="flex-1 flex items-center justify-center">
-          <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl border-2 border-dashed border-white/20 flex items-center justify-center bg-white/5">
-            <span className="text-white/30 text-sm font-medium">Logo Here</span>
-          </div>
+          <Image src="/Neurotech@ucsb-logo.png" alt="NeuroTech @ UCSB Logo" width={320} height={320} className="w-64 h-64 md:w-80 md:h-80 object-contain" />
         </FadeIn>
       </div>
     </section>
