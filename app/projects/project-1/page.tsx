@@ -25,9 +25,7 @@ const GlassCard = ({
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
   <div className="mb-5 flex items-center gap-3">
     <span className="h-8 w-[3px] rounded-full bg-gradient-to-b from-blue-400 to-indigo-300" />
-    <h2 className="text-xl md:text-2xl font-semibold">
-      {children}
-    </h2>
+    <h2 className="text-xl md:text-2xl font-semibold">{children}</h2>
   </div>
 );
 
@@ -77,9 +75,7 @@ const UpdateCard = ({ u }: { u: Update }) => (
     <div className="relative">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="text-lg font-semibold text-white/90">
-            {u.title}
-          </h3>
+          <h3 className="text-lg font-semibold text-white/90">{u.title}</h3>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/55">
             <span>{u.owner}</span>
             <span className="text-white/35">•</span>
@@ -127,9 +123,7 @@ const UpdateCard = ({ u }: { u: Update }) => (
 
           {u.next?.length ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-              <div className="text-xs font-semibold text-white/60">
-                Next
-              </div>
+              <div className="text-xs font-semibold text-white/60">Next</div>
               <ul className="mt-2 space-y-2 text-sm text-white/80">
                 {u.next.map((x, i) => (
                   <li key={i} className="flex gap-2">
@@ -185,6 +179,184 @@ const updates: Update[] = [
     next: ["Decision needed", "Proposed next step to unblock"],
   },
 ];
+
+type RelatedLink = {
+  id: string;
+  title: string;
+  href: string;
+  type: "documentation" | "research" | "source" | "design" | "repo" | "other";
+  description?: string;
+};
+
+const LINK_TYPE_STYLES: Record<RelatedLink["type"], string> = {
+  documentation: "bg-blue-400/15 text-blue-200 border-blue-400/20",
+  research: "bg-indigo-400/15 text-indigo-200 border-indigo-400/20",
+  source: "bg-emerald-400/15 text-emerald-200 border-emerald-400/20",
+  design: "bg-pink-400/15 text-pink-200 border-pink-400/20",
+  repo: "bg-violet-400/15 text-violet-200 border-violet-400/20",
+  other: "bg-white/10 text-white/80 border-white/15",
+};
+
+const LinkTypePill = ({ type }: { type: RelatedLink["type"] }) => (
+  <span
+    className={[
+      "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium capitalize",
+      LINK_TYPE_STYLES[type],
+    ].join(" ")}
+  >
+    {type}
+  </span>
+);
+
+const RelatedLinkCard = ({ link }: { link: RelatedLink }) => (
+  <a
+    href={link.href}
+    target="_blank"
+    rel="noreferrer"
+    className="group relative block rounded-3xl border border-white/10 bg-white/[0.05] p-5 transition-all hover:border-white/20 hover:bg-white/[0.07]"
+  >
+    <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(500px_circle_at_20%_0%,rgba(59,130,246,0.12),transparent_60%)]" />
+
+    <div className="relative">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="text-base md:text-lg font-semibold text-white/90 leading-snug">
+          {link.title}
+        </h3>
+        <LinkTypePill type={link.type} />
+      </div>
+
+      {link.description ? (
+        <p className="mt-2 text-sm text-white/65 leading-relaxed">
+          {link.description}
+        </p>
+      ) : null}
+
+      <div className="mt-4 text-xs text-white/50 truncate">{link.href}</div>
+    </div>
+  </a>
+);
+
+const relatedLinks: RelatedLink[] = [
+  {
+    id: "l1",
+    title: "Project documentation (placeholder)",
+    href: "#",
+    type: "documentation",
+    description:
+      "Main project doc, architecture notes, setup instructions, or runbook.",
+  },
+  {
+    id: "l1",
+    title: "Project documentation (placeholder)",
+    href: "#",
+    type: "documentation",
+    description:
+      "Main project doc, architecture notes, setup instructions, or runbook.",
+  },
+  {
+    id: "l2",
+    title: "Research paper / reference (placeholder)",
+    href: "#",
+    type: "research",
+    description:
+      "Primary paper, survey, or background material influencing the project.",
+  },
+  {
+    id: "l2",
+    title: "Research paper / reference (placeholder)",
+    href: "#",
+    type: "research",
+    description:
+      "Primary paper, survey, or background material influencing the project.",
+  },
+  {
+    id: "l3",
+    title: "Source / dataset reference (placeholder)",
+    href: "#",
+    type: "source",
+    description:
+      "Dataset origin, API source, benchmark, or external data reference.",
+  },
+  {
+    id: "l3",
+    title: "Source / dataset reference (placeholder)",
+    href: "#",
+    type: "source",
+    description:
+      "Dataset origin, API source, benchmark, or external data reference.",
+  },
+  {
+    id: "l4",
+    title: "Design / specs (placeholder)",
+    href: "#",
+    type: "design",
+    description: "UI mockups, architecture diagrams, or technical design docs.",
+  },
+  {
+    id: "l4",
+    title: "Design / specs (placeholder)",
+    href: "#",
+    type: "design",
+    description: "UI mockups, architecture diagrams, or technical design docs.",
+  },
+  {
+    id: "l5",
+    title: "Repository (placeholder)",
+    href: "#",
+    type: "repo",
+    description: "Codebase or monorepo link.",
+  },
+  {
+    id: "l5",
+    title: "Repository (placeholder)",
+    href: "#",
+    type: "repo",
+    description: "Codebase or monorepo link.",
+  },
+  {
+    id: "l6",
+    title: "Additional resource (placeholder)",
+    href: "#",
+    type: "other",
+    description: "Anything else relevant for context or onboarding.",
+  },
+  {
+    id: "l6",
+    title: "Additional resource (placeholder)",
+    href: "#",
+    type: "other",
+    description: "Anything else relevant for context or onboarding.",
+  },
+];
+
+const LINK_TYPE_LABELS: Record<RelatedLink["type"], string> = {
+  documentation: "Documentation",
+  research: "Research",
+  source: "Data Sources",
+  design: "Design & Specs",
+  repo: "Repositories",
+  other: "Other Resources",
+};
+
+const groupedLinks = relatedLinks.reduce<
+  Record<RelatedLink["type"], RelatedLink[]>
+>(
+  (acc, link) => {
+    if (!acc[link.type]) {
+      acc[link.type] = [];
+    }
+    acc[link.type].push(link);
+    return acc;
+  },
+  {
+    documentation: [],
+    research: [],
+    source: [],
+    design: [],
+    repo: [],
+    other: [],
+  },
+);
 
 export default function NeuroTechProjectPage() {
   return (
@@ -323,6 +495,53 @@ export default function NeuroTechProjectPage() {
             {updates.map((u) => (
               <UpdateCard key={u.id} u={u} />
             ))}
+          </div>
+        </section>
+
+        <section className="pt-2">
+          <div className="mb-5">
+            <div className="flex items-center gap-3">
+              <span className="h-8 w-[3px] rounded-full bg-gradient-to-b from-blue-400 to-indigo-300" />
+              <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+                Related links
+              </h2>
+            </div>
+            <p className="mt-2 text-sm md:text-base text-white/60">
+              Project documentation, research references, sources, repos, and
+              supporting materials.
+            </p>
+          </div>
+
+          <div className="space-y-10">
+            {(Object.keys(groupedLinks) as RelatedLink["type"][]).map(
+              (type) =>
+                groupedLinks[type].length > 0 && (
+                  <div key={type}>
+                    {/* Category Header */}
+                    <div className="mb-4">
+                      <h3 className="flex items-center gap-3 text-lg font-semibold text-white/90">
+                        <span>{LINK_TYPE_LABELS[type]}</span>
+
+                        <span
+                          className={[
+                            "rounded-full border px-3 py-1 text-xs font-medium",
+                            LINK_TYPE_STYLES[type],
+                          ].join(" ")}
+                        >
+                          {groupedLinks[type].length}
+                        </span>
+                      </h3>
+                    </div>
+
+                    {/* Links Grid */}
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      {groupedLinks[type].map((link) => (
+                        <RelatedLinkCard key={link.id} link={link} />
+                      ))}
+                    </div>
+                  </div>
+                ),
+            )}
           </div>
         </section>
       </main>
