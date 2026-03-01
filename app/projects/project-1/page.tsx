@@ -25,11 +25,166 @@ const GlassCard = ({
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
   <div className="mb-5 flex items-center gap-3">
     <span className="h-8 w-[3px] rounded-full bg-gradient-to-b from-blue-400 to-indigo-300" />
-    <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
+    <h2 className="text-xl md:text-2xl font-semibold">
       {children}
     </h2>
   </div>
 );
+
+type UpdateStatus = "done" | "in_progress" | "blocked";
+
+const STATUS_STYLES: Record<UpdateStatus, string> = {
+  done: "bg-emerald-400/15 text-emerald-200 border-emerald-400/20",
+  in_progress: "bg-blue-400/15 text-blue-200 border-blue-400/20",
+  blocked: "bg-rose-400/15 text-rose-200 border-rose-400/20",
+};
+
+const StatusPill = ({ status }: { status: UpdateStatus }) => {
+  const label =
+    status === "done"
+      ? "Done"
+      : status === "in_progress"
+        ? "In progress"
+        : "Blocked";
+  return (
+    <span
+      className={[
+        "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium",
+        STATUS_STYLES[status],
+      ].join(" ")}
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
+      {label}
+    </span>
+  );
+};
+
+type Update = {
+  id: string;
+  title: string;
+  owner: string;
+  date: string;
+  status: UpdateStatus;
+  summary: string;
+  highlights?: string[];
+  blockers?: string[];
+  next?: string[];
+};
+
+const UpdateCard = ({ u }: { u: Update }) => (
+  <div className="group relative rounded-3xl border border-white/10 bg-white/[0.05] p-6 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(600px_circle_at_30%_10%,rgba(59,130,246,0.12),transparent_55%)]" />
+    <div className="relative">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="text-lg font-semibold text-white/90">
+            {u.title}
+          </h3>
+          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/55">
+            <span>{u.owner}</span>
+            <span className="text-white/35">•</span>
+            <span>{u.date}</span>
+          </div>
+        </div>
+        <StatusPill status={u.status} />
+      </div>
+
+      <p className="mt-4 text-white/75">{u.summary}</p>
+
+      {u.highlights?.length || u.blockers?.length || u.next?.length ? (
+        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {u.highlights?.length ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="text-xs font-semibold text-white/60">
+                Highlights
+              </div>
+              <ul className="mt-2 space-y-2 text-sm text-white/80">
+                {u.highlights.map((x, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-300/80" />
+                    <span className="min-w-0">{x}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {u.blockers?.length ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="text-xs font-semibold text-white/60">
+                Blockers
+              </div>
+              <ul className="mt-2 space-y-2 text-sm text-white/80">
+                {u.blockers.map((x, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-300/80" />
+                    <span className="min-w-0">{x}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {u.next?.length ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <div className="text-xs font-semibold text-white/60">
+                Next
+              </div>
+              <ul className="mt-2 space-y-2 text-sm text-white/80">
+                {u.next.map((x, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300/80" />
+                    <span className="min-w-0">{x}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  </div>
+);
+
+const updates: Update[] = [
+  {
+    id: "u1",
+    title: "Workstream / Feature area (placeholder)",
+    owner: "Owner / Team (placeholder)",
+    date: "MM DD, YYYY",
+    status: "in_progress",
+    summary:
+      "1–2 sentence recap of what changed since the last meeting and why it matters.",
+    highlights: [
+      "Key outcome or deliverable completed",
+      "Metric, milestone, or improvement (optional)",
+    ],
+    blockers: ["Dependency, decision, or resource needed (optional)"],
+    next: ["Next action item", "Next action item (optional)"],
+  },
+  {
+    id: "u2",
+    title: "Another update title (placeholder)",
+    owner: "Owner / Team (placeholder)",
+    date: "MM DD, YYYY",
+    status: "done",
+    summary:
+      "Short summary of progress, decisions made, or results achieved since last meeting.",
+    highlights: ["What was finished", "What was validated (optional)"],
+    next: ["Follow-up task or handoff"],
+  },
+  {
+    id: "u3",
+    title: "Blocked item / open risk (placeholder)",
+    owner: "Owner / Team (placeholder)",
+    date: "MM DD, YYYY",
+    status: "blocked",
+    summary:
+      "Explain what's stuck at a high level and the impact if it remains unresolved.",
+    blockers: ["What is blocking progress", "Who/what is needed to unblock"],
+    next: ["Decision needed", "Proposed next step to unblock"],
+  },
+];
 
 export default function NeuroTechProjectPage() {
   return (
@@ -59,13 +214,13 @@ export default function NeuroTechProjectPage() {
                   Neurotech • BCI • Robotics
                 </div>
 
-                <h1 className="mt-6 text-5xl md:text-7xl font-bold leading-[1.02] tracking-tight">
+                <h1 className="mt-6 text-5xl md:text-7xl font-bold">
                   <span className="bg-gradient-to-r from-blue-300 via-blue-200 to-indigo-200 bg-clip-text text-transparent">
                     EEG-Controlled Drone
                   </span>
                 </h1>
 
-                <p className="mt-5 text-lg md:text-xl leading-relaxed text-blue-100/90">
+                <p className="mt-5 text-lg md:text-xl text-blue-100/90">
                   Brief description of project. Replace this with a
                   one/two-liner overview of the project
                 </p>
@@ -100,38 +255,76 @@ export default function NeuroTechProjectPage() {
           <div className="md:col-span-7">
             <GlassCard>
               <SectionTitle>Description</SectionTitle>
-              <p className="text-white/80 leading-relaxed text-base md:text-lg">
-                Add a longer description of the project here
+              <p className="text-white/80 text-base md:text-lg">
+                Add a concise overview of the project. i.e. what it is, who it's
+                for, what problem it solves.
               </p>
+
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-sm text-white/60">Tech stack</div>
+                  <div className="mt-1 font-semibold">
+                    List tools / frameworks
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-sm text-white/60">Demo / repo</div>
+                  <div className="mt-1 font-semibold">Link label or status</div>
+                </div>
+              </div>
             </GlassCard>
           </div>
 
           <div className="md:col-span-5">
             <GlassCard className="h-full">
               <SectionTitle>Purpose</SectionTitle>
-              <p className="text-white/80 leading-relaxed text-base md:text-lg">
-                Include a short blurb about the purpose of this project
+              <p className="text-white/80 text-base md:text-lg">
+                Explain the goal of the project and what success looks like in
+                one paragraph.
               </p>
 
               <div className="mt-8 grid grid-cols-1 gap-4">
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                   <div className="text-sm text-white/60">Focus</div>
-                  <div className="mt-1 font-semibold">BCI Signal → Control</div>
+                  <div className="mt-1 font-semibold">Primary objective</div>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                   <div className="text-sm text-white/60">Constraint</div>
-                  <div className="mt-1 font-semibold">Latency + Noise</div>
+                  <div className="mt-1 font-semibold">
+                    Key limitation / challenge
+                  </div>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
                   <div className="text-sm text-white/60">Outcome</div>
                   <div className="mt-1 font-semibold">
-                    Stable flight commands
+                    Expected result / deliverable
                   </div>
                 </div>
               </div>
             </GlassCard>
           </div>
         </div>
+
+        <section className="pt-4">
+          <div className="mb-5">
+            <div className="flex items-center gap-3">
+              <span className="h-8 w-[3px] rounded-full bg-gradient-to-b from-blue-400 to-indigo-300" />
+              <h2 className="text-xl md:text-2xl font-semibold">
+                Updates from last meeting
+              </h2>
+            </div>
+            <p className="mt-2 text-sm md:text-base text-white/60">
+              Status, summary, blockers, and next steps. Replace placeholders
+              with meeting notes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            {updates.map((u) => (
+              <UpdateCard key={u.id} u={u} />
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );
