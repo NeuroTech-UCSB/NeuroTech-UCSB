@@ -37,31 +37,31 @@ export default function Navbar() {
                   href="/projects/project-1"
                   className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
                 >
-                  Project 1
+                  EEG-Controlled Drone
                 </Link>
                 <Link
                   href="/projects/project-2"
                   className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
                 >
-                  Project 2
+                  Brain-Controlled Robotic Arm
                 </Link>
                 <Link
                   href="/projects/project-3"
                   className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
                 >
-                  Project 3
+                  fNIRS Sensor
                 </Link>
                 <Link
                   href="/projects/project-4"
                   className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
                 >
-                  Project 4
+                  NeuroColor
                 </Link>
                 <Link
                   href="/projects/project-5"
                   className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
                 >
-                  Project 5
+                  Music Genre Detection
                 </Link>
               </div>
             </div>
