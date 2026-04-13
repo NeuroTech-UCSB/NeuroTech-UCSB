@@ -1,138 +1,117 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+
+const linkClass = "text-primary/80 hover:text-primary transition-colors duration-200 text-base font-medium tracking-wide";
+
+function DropdownMenu({ label, href, items }: { label: string; href: string; items: { name: string; href: string }[] }) {
+  return (
+    <div className="relative group">
+      <Link href={href} className={linkClass}>
+        {label}
+      </Link>
+      <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
+        <div className="bg-white border border-primary/10 rounded-lg min-w-[200px] py-1 shadow-xl shadow-primary/10">
+          {items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block px-4 py-2.5 text-sm text-primary/70 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
   return (
-    <nav className="bg-gray-800">
-      <div className="flex items-center justify-between h-20 px-8">
-        {/* Left: Brand (Home Button) */}
-        <Link
-          href="/"
-          className="text-white text-xl font-semibold tracking-wide hover:text-gray-300 transition-colors duration-200"
-        >
-          Neurotech @ UCSB
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-primary/10"
+      style={{ backgroundColor: "rgba(255, 255, 255, 0.95)" }}
+    >
+      <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="transition-opacity hover:opacity-80">
+          <Image src="/neurotech-ucsb-logo.png" alt="NeuroTech @ UCSB" width={60} height={60} className="h-12 md:h-16 w-auto object-contain" />
         </Link>
 
-        {/* Right: Navigation */}
-        <div className="flex items-center gap-10 text-lg font-medium">
-          <Link
-            href="/about"
-            className="text-gray-200 hover:text-white transition-colors duration-200"
-          >
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden text-primary/70 hover:text-primary transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {mobileOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-8">
+          <Link href="/about" className={linkClass}>
             About
           </Link>
-
-          {/* Projects Dropdown */}
-          <div className="relative group">
-            <Link
-              href="/projects"
-              className="text-gray-200 hover:text-white transition-colors duration-200"
-            >
-              Projects
-            </Link>
-
-            {/* hover buffer wrapper (prevents flicker / losing hover) */}
-            <div className="absolute left-0 top-full hidden group-hover:block z-50 pt-2">
-              <div className="bg-gray-700 min-w-[200px] rounded-md shadow-lg overflow-hidden">
-                <Link
-                  href="/projects/project-1"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Project 1
-                </Link>
-                <Link
-                  href="/projects/project-2"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Project 2
-                </Link>
-                <Link
-                  href="/projects/project-3"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Project 3
-                </Link>
-                <Link
-                  href="/projects/project-4"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Project 4
-                </Link>
-                <Link
-                  href="/projects/project-5"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Project 5
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Publications Dropdown */}
-          <div className="relative group">
-            <Link
-              href="/publications"
-              className="text-gray-200 hover:text-white transition-colors duration-200"
-            >
-              Publications
-            </Link>
-
-            <div className="absolute left-0 top-full hidden group-hover:block z-50 pt-2">
-              <div className="bg-gray-700 min-w-[220px] rounded-md shadow-lg overflow-hidden">
-                <Link
-                  href="/publications/medium-blog"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Medium Blog
-                </Link>
-                <Link
-                  href="/publications/weekly-newsletter"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Weekly Newsletter
-                </Link>
-                <Link
-                  href="/publications/podcast"
-                  className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-                >
-                  Podcast
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Conference Dropdown */}
-          <div className="relative group">
-          <Link
+          <DropdownMenu
+            label="Projects"
+            href="/projects"
+            items={[
+              { name: "Project 1", href: "/projects/project-1" },
+              { name: "Project 2", href: "/projects/project-2" },
+              { name: "Project 3", href: "/projects/project-3" },
+              { name: "Project 4", href: "/projects/project-4" },
+              { name: "Project 5", href: "/projects/project-5" },
+            ]}
+          />
+          <DropdownMenu
+            label="Publications"
+            href="/publications"
+            items={[
+              { name: "Medium Blog", href: "/publications/medium-blog" },
+              { name: "Weekly Newsletter", href: "/publications/weekly-newsletter" },
+              { name: "Podcast", href: "/publications/podcast" },
+            ]}
+          />
+          <DropdownMenu
+            label="Conference"
             href="/conference"
-            className="text-gray-200 hover:text-white transition-colors duration-200"
-          >
-            Conference
-          </Link>
-
-          {/* hover buffer wrapper + keep-open-on-hover */}
-          <div className="absolute left-0 top-full hidden group-hover:block hover:block z-50 pt-2">
-            <div className="bg-gray-700 min-w-[200px] rounded-md shadow-lg overflow-hidden">
-              <a
-                href="http://cntc-2026.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block px-5 py-3 text-gray-200 hover:bg-gray-600 transition"
-              >
-                CNTC (2026)
-              </a>
-            </div>
-          </div>
-        </div>
-
-          {/* Apply */}
+            items={[{ name: "CNTC", href: "/conference/CNTC" }]}
+          />
           <Link
             href="/apply"
-            className="text-gray-200 hover:text-white transition-colors duration-200"
+            className="bg-primary text-white px-5 py-2 rounded-full text-base font-semibold hover:bg-primary-dark transition-all duration-200"
           >
             Apply
           </Link>
         </div>
       </div>
+
+      {/* Mobile nav */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-primary/10 px-6 py-4 space-y-3 bg-white">
+          <Link href="/about" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>About</Link>
+          <Link href="/projects" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Projects</Link>
+          <Link href="/publications" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Publications</Link>
+          <Link href="/conference" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Conference</Link>
+          <Link
+            href="/apply"
+            className="inline-block bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all"
+            onClick={() => setMobileOpen(false)}
+          >
+            Apply
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
