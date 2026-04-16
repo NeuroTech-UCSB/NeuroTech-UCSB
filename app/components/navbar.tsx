@@ -66,11 +66,11 @@ export default function Navbar() {
             label="Projects"
             href="/projects"
             items={[
-              { name: "Project 1", href: "/projects/project-1" },
-              { name: "Project 2", href: "/projects/project-2" },
-              { name: "Project 3", href: "/projects/project-3" },
-              { name: "Project 4", href: "/projects/project-4" },
-              { name: "Project 5", href: "/projects/project-5" },
+              { name: "BCI Robotic Arm", href: "/projects/neuroarm" },
+              { name: "NeuroColor", href: "/projects/neurocolor" },
+              { name: "Music Genre Detection", href: "/projects/music-genre" },
+              { name: "PsyCopter", href: "/projects/project-4" },
+              { name: "Mini fNIRS", href: "/projects/project-5" },
             ]}
           />
           <DropdownMenu
