@@ -211,9 +211,13 @@ export default function Project1() {
                 className="mt-5 max-w-4xl text-base leading-relaxed md:text-lg"
                 style={{ color: "rgba(12, 60, 110, 0.72)" }}
               >
-                This project involves a brain-controlled robotic arm using an
-                EEG headset to read brain signals, enabling users to perform
-                actions such as grasping and releasing objects through thought.
+                Using an EEG headset, NeuroArm turns intention into motion. 
+                Train a couple of mental or facial commands, and the system 
+                recognizes your brain/face activity in real time, translating 
+                it into smooth joint movements on a 3D-printed robotic arm. <br />
+                <br />
+                Hardware Tools: <br />
+                EMOTIV Insight • Python • Arduino Uno R3 • 5 V power supply • 3D-printed robot arm
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
@@ -324,7 +328,7 @@ export default function Project1() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-6 pb-16 md:px-10">
+      <section className="mx-auto w-full max-w-6xl pt-8 px-6 pb-16 md:px-10">
         <FadeIn delay={250}>
           <section className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <article className="rounded-3xl border border-primary/10 bg-white/90 p-6 shadow-xl shadow-primary/5 md:p-8">

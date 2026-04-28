@@ -6,7 +6,15 @@ import { useState } from "react";
 
 const linkClass = "text-primary/80 hover:text-primary transition-colors duration-200 text-base font-medium tracking-wide";
 
-function DropdownMenu({ label, href, items }: { label: string; href: string; items: { name: string; href: string }[] }) {
+function DropdownMenu({
+  label,
+  href,
+  items,
+}: {
+  label: string;
+  href: string;
+  items: { name: string; href: string }[];
+}) {
   return (
     <div className="relative group">
       <Link href={href} className={linkClass}>
@@ -14,15 +22,28 @@ function DropdownMenu({ label, href, items }: { label: string; href: string; ite
       </Link>
       <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
         <div className="bg-white border border-primary/10 rounded-lg min-w-[200px] py-1 shadow-xl shadow-primary/10">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block px-4 py-2.5 text-sm text-primary/70 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {items.map((item) => {
+            const isExternal = item.href.startsWith("http");
+            return isExternal ? (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block px-4 py-2.5 text-sm text-primary/70 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block px-4 py-2.5 text-sm text-primary/70 hover:text-primary hover:bg-primary/5 transition-colors duration-150"
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -69,8 +90,8 @@ export default function Navbar() {
               { name: "BCI Robotic Arm", href: "/projects/neuroarm" },
               { name: "NeuroColor", href: "/projects/neurocolor" },
               { name: "Music Genre Detection", href: "/projects/music-genre" },
-              { name: "PsyCopter", href: "/projects/project-4" },
-              { name: "Mini fNIRS", href: "/projects/project-5" },
+              { name: "PsyCopter", href: "/projects/psycopter" },
+              { name: "Mini fNIRS", href: "/projects/mini-fnirs" },
             ]}
           />
           <DropdownMenu
@@ -85,7 +106,9 @@ export default function Navbar() {
           <DropdownMenu
             label="Conference"
             href="/conference"
-            items={[{ name: "CNTC", href: "/conference/CNTC" }]}
+            items={[
+              { name: "CNTC", href: "https://cntc2026.vercel.app/" },
+            ]}
           />
           <Link
             href="/apply"
