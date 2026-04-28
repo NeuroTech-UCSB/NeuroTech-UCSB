@@ -67,10 +67,11 @@ export default function Navbar() {
             href="/projects"
             items={[
               { name: "BCI Robotic Arm", href: "/projects/neuroarm" },
+              { name: "PsyCopter", href: "/projects/psycopter" },
               { name: "NeuroColor", href: "/projects/neurocolor" },
-              { name: "Music Genre Detection", href: "/projects/music-genre" },
-              { name: "PsyCopter", href: "/projects/project-4" },
-              { name: "Mini fNIRS", href: "/projects/project-5" },
+              { name: "Mini fNIRS", href: "/projects/mini-fnirs" },
+              { name: "Music Genre Classification", href: "/projects/music-genre" },
+              { name: "Wetware Computing", href: "/projects/wetware" },
             ]}
           />
           <DropdownMenu

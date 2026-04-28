@@ -8,48 +8,63 @@ import FadeIn from "../components/fade-in";
 const projects = [
   {
     id: "01",
-    title: "Project _____",
-    status: "Status _____",
-    lead: "Lead _____",
-    stack: ["tag1", "tag2", "tag3"],
-    summary: "Insert short project summary here: _____.",
-    href: "/projects/project-1",
+    title: "BCI Robotic Arm",
+    status: "In Progress",
+    lead: "Jake Forteza",
+    stack: ["BCI", "EEG", "Robotics", "Signal Processing"],
+    summary:
+      "Brain-controlled robotic arm using an EEG headset to read brain signals — users perform actions like grasping and releasing objects through thought.",
+    href: "/projects/neuroarm",
   },
   {
     id: "02",
-    title: "Project _____",
-    status: "Status _____",
-    lead: "Lead _____",
-    stack: ["tag1", "tag2", "tag3"],
-    summary: "Insert short project summary here: _____.",
-    href: "/projects/project-2",
+    title: "PsyCopter",
+    status: "In Progress",
+    lead: "_____",
+    stack: ["BCI", "Drones", "Intent Decoding"],
+    summary:
+      "Translates brain waves into user intent for drone flight. Focused on stable real-time mapping from neural signals to flight commands.",
+    href: "/projects/psycopter",
   },
   {
     id: "03",
-    title: "Project _____",
-    status: "Status _____",
-    lead: "Lead _____",
-    stack: ["tag1", "tag2", "tag3"],
-    summary: "Insert short project summary here: _____.",
-    href: "/projects/project-3",
+    title: "NeuroColor",
+    status: "In Progress",
+    lead: "_____",
+    stack: ["EEG", "Generative", "Creative Tools"],
+    summary:
+      "Generates colors from neural activity — fills in palettes for a piece, or outputs colors driven by brain state.",
+    href: "/projects/neurocolor",
   },
   {
     id: "04",
-    title: "Project _____",
-    status: "Status _____",
-    lead: "Lead _____",
-    stack: ["tag1", "tag2", "tag3"],
-    summary: "Insert short project summary here: _____.",
-    href: "/projects/project-4",
+    title: "Mini fNIRS",
+    status: "In Progress",
+    lead: "_____",
+    stack: ["fNIRS", "Hardware", "Optical Sensing"],
+    summary:
+      "Custom functional near-infrared spectroscopy sensor that tracks changes in blood-oxygen levels in the brain.",
+    href: "/projects/mini-fnirs",
   },
   {
     id: "05",
-    title: "Project _____",
-    status: "Status _____",
-    lead: "Lead _____",
-    stack: ["tag1", "tag2", "tag3"],
-    summary: "Insert short project summary here: _____.",
-    href: "/projects/project-5",
+    title: "Music Genre Classification",
+    status: "In Progress",
+    lead: "_____",
+    stack: ["EEG", "ML", "Classification"],
+    summary:
+      "Decode the genre of music a listener is hearing using only their EEG signals.",
+    href: "/projects/music-genre",
+  },
+  {
+    id: "06",
+    title: "Wetware Computing",
+    status: "New",
+    lead: "_____",
+    stack: ["Wetware", "Neural Cultures", "Bio-computing"],
+    summary:
+      "Living neural networks cultured in-house, used as a substrate to process information.",
+    href: "/projects/wetware",
   },
 ];
 
@@ -89,7 +104,9 @@ export default function Projects() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary/80">NeuroTech Research</p>
             <h1 className="text-4xl font-bold uppercase tracking-tight text-primary-dark md:text-6xl">Projects</h1>
             <p className="mt-5 text-base leading-relaxed md:text-lg" style={{ color: "rgba(12, 60, 110, 0.68)" }}>
-              Insert hero description here: _____.
+              Six active project tracks — from EEG-driven robotics and drones to optical brain-oxygen sensing and
+              living neural cultures. Each project ships closed-loop systems with real hardware, real signals, and real
+              demos.
             </p>
           </div>
         </FadeIn>
@@ -98,7 +115,9 @@ export default function Projects() {
           <section className="rounded-3xl border border-primary/10 bg-white/85 p-6 shadow-xl shadow-primary/5 md:p-8">
             <h2 className="text-2xl font-bold text-primary-dark md:text-3xl">Purpose</h2>
             <p className="mt-4 max-w-4xl text-base leading-relaxed md:text-lg" style={{ color: "rgba(12, 60, 110, 0.72)" }}>
-              Insert purpose statement here: _____.
+              Projects are how members move from theory to practice. Every track pairs experienced leads with new
+              members, ships an end-to-end pipeline each quarter, and produces artifacts — repos, posters, papers, and
+              demos — that members carry into internships, research, and graduate study.
             </p>
           </section>
         </FadeIn>
