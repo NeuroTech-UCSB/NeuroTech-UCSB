@@ -63,24 +63,9 @@ const projectTracks = [
     summary: "Brain waves to drone control. Translates user intent from neural signals into flight commands.",
   },
   {
-    name: "NeuroColor",
-    href: "/projects/neurocolor",
-    summary: "Generative color from neural activity — fills in palettes and outputs colors driven by brain state.",
-  },
-  {
     name: "Mini fNIRS",
     href: "/projects/mini-fnirs",
     summary: "Custom functional near-infrared spectroscopy sensor that tracks blood-oxygen changes in the brain.",
-  },
-  {
-    name: "Music Genre Classification",
-    href: "/projects/music-genre",
-    summary: "Decode the genre of music a listener is hearing using only their EEG.",
-  },
-  {
-    name: "Wetware Computing",
-    href: "/projects/wetware",
-    summary: "Living neural networks cultured in-house, used as a substrate for processing information.",
   },
 ];
 
@@ -101,15 +86,15 @@ export default function About() {
       <NeuralBackground />
 
       <div
-        className="absolute top-20 -left-24 h-80 w-80 rounded-full blur-[120px]"
+        className="absolute top-20 -left-24 h-80 w-80 rounded-full blur-[120px] bg-blob"
         style={{ backgroundColor: "var(--primary)", opacity: 0.08, animation: "float-1 18s ease-in-out infinite" }}
       />
       <div
-        className="absolute bottom-20 -right-24 h-80 w-80 rounded-full blur-[120px]"
+        className="absolute bottom-20 -right-24 h-80 w-80 rounded-full blur-[120px] bg-blob"
         style={{ backgroundColor: "var(--accent)", opacity: 0.16, animation: "float-2 20s ease-in-out infinite" }}
       />
 
-      <section className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-24 pt-28 md:px-10">
+      <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 pb-24 pt-28 md:px-10">
         {/* Hero */}
         <FadeIn>
           <div className="max-w-3xl">
@@ -201,9 +186,28 @@ export default function About() {
           <section className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <article className="rounded-3xl border border-primary/10 bg-white/90 p-6 shadow-xl shadow-primary/5 md:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/70">Part of a broader network</p>
-              <h2 className="mt-1 text-2xl font-bold text-primary-dark md:text-3xl">A NeuroTech chapter</h2>
+              <h2 className="mt-1 text-2xl font-bold text-primary-dark md:text-3xl">
+                A{" "}
+                <a
+                  href="https://neurotechx.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary"
+                >
+                  NeuroTechX
+                </a>{" "}
+                chapter
+              </h2>
               <p className="mt-4 text-base leading-relaxed" style={{ color: "rgba(12, 60, 110, 0.72)" }}>
-                NeuroTech is a non-profit organization whose mission is to advance neurotechnology by providing key
+                <a
+                  href="https://neurotechx.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary"
+                >
+                  NeuroTechX
+                </a>{" "}
+                is a non-profit organization whose mission is to advance neurotechnology by providing key
                 resources and learning opportunities, and by leading local and worldwide technological initiatives. Our
                 UCSB chapter carries that forward with an emphasis on community, education, and professional development.
               </p>

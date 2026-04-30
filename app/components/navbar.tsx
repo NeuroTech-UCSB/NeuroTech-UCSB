@@ -12,14 +12,18 @@ function DropdownMenu({
   items,
 }: {
   label: string;
-  href: string;
+  href?: string;
   items: { name: string; href: string }[];
 }) {
   return (
     <div className="relative group">
-      <Link href={href} className={linkClass}>
-        {label}
-      </Link>
+      {href ? (
+        <Link href={href} className={linkClass}>
+          {label}
+        </Link>
+      ) : (
+        <span className={`${linkClass} cursor-default`}>{label}</span>
+      )}
       <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
         <div className="bg-white border border-primary/10 rounded-lg min-w-[200px] py-1 shadow-xl shadow-primary/10">
           {items.map((item) => {
@@ -60,7 +64,7 @@ export default function Navbar() {
       <div className="w-full px-4 sm:px-8 md:px-12 lg:px-20 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="transition-opacity hover:opacity-80">
-          <Image src="/neurotech-ucsb-logo.png" alt="NeuroTech @ UCSB" width={60} height={60} className="h-12 md:h-16 w-auto object-contain" />
+          <Image src="/neurotech-ucsb.png" alt="NeuroTech @ UCSB" width={60} height={60} className="h-12 md:h-16 w-auto object-contain" />
         </Link>
 
         {/* Mobile toggle */}
@@ -92,12 +96,10 @@ export default function Navbar() {
               { name: "NeuroColor", href: "/projects/neurocolor" },
               { name: "Mini fNIRS", href: "/projects/mini-fnirs" },
               { name: "Music Genre Classification", href: "/projects/music-genre" },
-              { name: "Wetware Computing", href: "/projects/wetware" },
             ]}
           />
           <DropdownMenu
             label="Publications"
-            href="/publications"
             items={[
               { name: "Medium Blog", href: "/publications/medium-blog" },
               { name: "Weekly Newsletter", href: "/publications/weekly-newsletter" },
@@ -106,7 +108,6 @@ export default function Navbar() {
           />
           <DropdownMenu
             label="Conference"
-            href="/conference"
             items={[
               { name: "CNTC", href: "https://cntc2026.vercel.app/" },
             ]}
@@ -125,8 +126,11 @@ export default function Navbar() {
         <div className="md:hidden border-t border-primary/10 px-6 py-4 space-y-3 bg-white">
           <Link href="/about" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>About</Link>
           <Link href="/projects" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Projects</Link>
-          <Link href="/publications" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Publications</Link>
-          <Link href="/conference" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Conference</Link>
+          <p className={`block text-sm ${linkClass} cursor-default`}>Publications</p>
+          <Link href="/publications/medium-blog" className={`block pl-4 text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Medium Blog</Link>
+          <Link href="/publications/weekly-newsletter" className={`block pl-4 text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Weekly Newsletter</Link>
+          <Link href="/publications/podcast" className={`block pl-4 text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>Podcast</Link>
+          <a href="https://cntc2026.vercel.app/" target="_blank" rel="noopener noreferrer" className={`block text-sm ${linkClass}`} onClick={() => setMobileOpen(false)}>CNTC</a>
           <Link
             href="/apply"
             className="inline-block bg-primary text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-primary-dark transition-all"

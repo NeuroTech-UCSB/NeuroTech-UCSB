@@ -33,9 +33,9 @@ const featuredProjects = [
     href: "/projects/psycopter",
   },
   {
-    name: "Wetware Computing",
-    summary: "Living neural cultures used as a substrate for processing information.",
-    href: "/projects/wetware",
+    name: "Mini fNIRS",
+    summary: "Custom functional near-infrared spectroscopy sensor that tracks blood-oxygen changes in the brain.",
+    href: "/projects/mini-fnirs",
   },
 ];
 
@@ -60,15 +60,15 @@ export default function Home() {
         <NeuralBackground />
 
         <div
-          className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-[128px]"
+          className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-[128px] bg-blob"
           style={{ backgroundColor: "var(--primary)", opacity: 0.08, animation: "float-1 18s ease-in-out infinite" }}
         />
         <div
-          className="absolute bottom-1/4 -right-32 w-80 h-80 rounded-full blur-[128px]"
+          className="absolute bottom-1/4 -right-32 w-80 h-80 rounded-full blur-[128px] bg-blob"
           style={{ backgroundColor: "var(--primary-dark)", opacity: 0.06, animation: "float-2 22s ease-in-out infinite" }}
         />
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-24 pb-12 md:py-0 flex flex-col md:flex-row items-center gap-8 md:gap-16">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 pb-12 md:py-0 flex flex-col md:flex-row items-center gap-8 md:gap-16">
           <div className="flex-1 text-left">
             <FadeIn delay={200}>
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight tracking-tight uppercase text-primary-dark">
@@ -77,7 +77,7 @@ export default function Home() {
               </h1>
             </FadeIn>
             <FadeIn delay={500}>
-              <p className="text-base md:text-xl mb-8 md:mb-10 leading-relaxed max-w-lg" style={{ color: "rgba(12, 60, 110, 0.65)" }}>
+              <p className="text-lg md:text-2xl mb-8 md:mb-10 leading-relaxed max-w-xl" style={{ color: "rgba(12, 60, 110, 0.65)" }}>
                 Bridging neuroscience and engineering. We design, build, and experiment with brain-computer interfaces and neurotechnology.
               </p>
             </FadeIn>
@@ -85,13 +85,13 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 <Link
                   href="/apply"
-                  className="px-8 py-3.5 rounded-full font-semibold text-sm uppercase bg-primary text-white hover:bg-primary-dark hover:scale-105 transition-all duration-200"
+                  className="px-9 py-4 rounded-full font-semibold text-base uppercase bg-primary text-white hover:bg-primary-dark hover:scale-105 transition-all duration-200"
                 >
                   JOIN US
                 </Link>
                 <Link
                   href="/about"
-                  className="border border-primary text-primary px-8 py-3.5 rounded-full font-semibold text-sm uppercase hover:bg-primary hover:text-white transition-all duration-200"
+                  className="border border-primary text-primary px-9 py-4 rounded-full font-semibold text-base uppercase hover:bg-primary hover:text-white transition-all duration-200"
                 >
                   LEARN MORE
                 </Link>
@@ -100,14 +100,14 @@ export default function Home() {
           </div>
 
           <FadeIn delay={400} className="hidden sm:flex flex-1 items-center justify-end">
-            <Image src="/neurotech-ucsb.png" alt="NeuroTech @ UCSB Logo" width={320} height={320} className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 object-contain" />
+            <Image src="/neurotech-ucsb.png" alt="NeuroTech @ UCSB Logo" width={384} height={384} className="w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 object-contain" />
           </FadeIn>
         </div>
       </section>
 
       {/* Mission strip */}
       <section className="relative bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
           <FadeIn>
             <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
               <div>
@@ -141,7 +141,7 @@ export default function Home() {
             backgroundSize: "60px 60px",
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-24">
+        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
           <FadeIn>
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/70">What we do</p>
@@ -174,7 +174,7 @@ export default function Home() {
 
       {/* Featured projects */}
       <section className="relative bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
           <FadeIn>
             <div className="mb-10 flex items-end justify-between gap-4">
               <div>
@@ -236,15 +236,15 @@ export default function Home() {
           }}
         />
         <div
-          className="absolute -top-24 -right-20 h-96 w-96 rounded-full blur-[128px]"
+          className="absolute -top-24 -right-20 h-96 w-96 rounded-full blur-[128px] bg-blob"
           style={{ backgroundColor: "var(--accent)", opacity: 0.18, animation: "float-1 20s ease-in-out infinite" }}
         />
         <div
-          className="absolute -bottom-20 -left-24 h-80 w-80 rounded-full blur-[128px]"
+          className="absolute -bottom-20 -left-24 h-80 w-80 rounded-full blur-[128px] bg-blob"
           style={{ backgroundColor: "var(--primary)", opacity: 0.4, animation: "float-2 24s ease-in-out infinite" }}
         />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
+        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
           <FadeIn>
             <div className="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
               <div>

@@ -10,7 +10,7 @@ const projects = [
     id: "01",
     title: "BCI Robotic Arm",
     status: "In Progress",
-    lead: "Jake Forteza",
+    lead: "Spike Rao",
     stack: ["BCI", "EEG", "Robotics", "Signal Processing"],
     summary:
       "Brain-controlled robotic arm using an EEG headset to read brain signals — users perform actions like grasping and releasing objects through thought.",
@@ -20,7 +20,7 @@ const projects = [
     id: "02",
     title: "PsyCopter",
     status: "In Progress",
-    lead: "_____",
+    lead: "Vihan Jayaraman",
     stack: ["BCI", "Drones", "Intent Decoding"],
     summary:
       "Translates brain waves into user intent for drone flight. Focused on stable real-time mapping from neural signals to flight commands.",
@@ -30,7 +30,7 @@ const projects = [
     id: "03",
     title: "NeuroColor",
     status: "In Progress",
-    lead: "_____",
+    lead: "Tishya Chauhan",
     stack: ["EEG", "Generative", "Creative Tools"],
     summary:
       "Generates colors from neural activity — fills in palettes for a piece, or outputs colors driven by brain state.",
@@ -40,7 +40,7 @@ const projects = [
     id: "04",
     title: "Mini fNIRS",
     status: "In Progress",
-    lead: "_____",
+    lead: "John Chen",
     stack: ["fNIRS", "Hardware", "Optical Sensing"],
     summary:
       "Custom functional near-infrared spectroscopy sensor that tracks changes in blood-oxygen levels in the brain.",
@@ -50,21 +50,11 @@ const projects = [
     id: "05",
     title: "Music Genre Classification",
     status: "In Progress",
-    lead: "_____",
+    lead: "Yash Kumar",
     stack: ["EEG", "ML", "Classification"],
     summary:
       "Decode the genre of music a listener is hearing using only their EEG signals.",
     href: "/projects/music-genre",
-  },
-  {
-    id: "06",
-    title: "Wetware Computing",
-    status: "New",
-    lead: "_____",
-    stack: ["Wetware", "Neural Cultures", "Bio-computing"],
-    summary:
-      "Living neural networks cultured in-house, used as a substrate to process information.",
-    href: "/projects/wetware",
   },
 ];
 
@@ -90,23 +80,23 @@ export default function Projects() {
       <NeuralBackground />
 
       <div
-        className="absolute top-20 -left-24 h-80 w-80 rounded-full blur-[120px]"
+        className="absolute top-20 -left-24 h-80 w-80 rounded-full blur-[120px] bg-blob"
         style={{ backgroundColor: "var(--primary)", opacity: 0.08, animation: "float-1 18s ease-in-out infinite" }}
       />
       <div
-        className="absolute bottom-20 -right-24 h-80 w-80 rounded-full blur-[120px]"
+        className="absolute bottom-20 -right-24 h-80 w-80 rounded-full blur-[120px] bg-blob"
         style={{ backgroundColor: "var(--accent)", opacity: 0.16, animation: "float-2 20s ease-in-out infinite" }}
       />
 
-      <section className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-16 pt-28 md:px-10">
+      <section className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 pb-16 pt-28 md:px-10">
         <FadeIn>
           <div className="max-w-3xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary/80">NeuroTech Research</p>
             <h1 className="text-4xl font-bold uppercase tracking-tight text-primary-dark md:text-6xl">Projects</h1>
             <p className="mt-5 text-base leading-relaxed md:text-lg" style={{ color: "rgba(12, 60, 110, 0.68)" }}>
-              Six active project tracks — from EEG-driven robotics and drones to optical brain-oxygen sensing and
-              living neural cultures. Each project ships closed-loop systems with real hardware, real signals, and real
-              demos.
+              Five active project tracks — from EEG-driven robotics and drones to optical brain-oxygen sensing and
+              EEG-decoded music classification. Each project ships closed-loop systems with real hardware, real signals,
+              and real demos.
             </p>
           </div>
         </FadeIn>
@@ -135,61 +125,70 @@ export default function Projects() {
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-              <article className="rounded-3xl border border-primary/10 bg-white/90 p-6 shadow-xl shadow-primary/5 md:p-8">
-                <div className="mb-5 flex items-center justify-between">
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.11em] text-primary">
-                    Featured Project
-                  </span>
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between gap-3">
                   <span className="text-sm font-semibold text-primary/70">
                     {active + 1} / {projects.length}
                   </span>
-                </div>
-
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">Project {current.id}</p>
-                <h3 className="mt-2 text-2xl font-bold text-primary-dark md:text-3xl">{current.title}</h3>
-                <p className="mt-2 text-sm font-medium text-accent">Status: {current.status}</p>
-                <p className="mt-4 text-base leading-relaxed" style={{ color: "rgba(12, 60, 110, 0.72)" }}>
-                  {current.summary}
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {current.stack.map((chip) => (
-                    <span
-                      key={chip}
-                      className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-primary/80"
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={goPrev}
+                      aria-label="Previous project"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 text-primary transition hover:bg-primary hover:text-white"
                     >
-                      {chip}
+                      ←
+                    </button>
+                    <button
+                      type="button"
+                      onClick={goNext}
+                      aria-label="Next project"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 text-primary transition hover:bg-primary hover:text-white"
+                    >
+                      →
+                    </button>
+                  </div>
+                </div>
+
+                <article className="flex flex-col rounded-3xl border border-primary/10 bg-white/90 p-6 shadow-xl shadow-primary/5 md:p-8">
+                  <div className="mb-5">
+                    <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.11em] text-primary">
+                      Featured Project
                     </span>
-                  ))}
-                </div>
+                  </div>
 
-                <p className="mt-5 text-sm" style={{ color: "rgba(12, 60, 110, 0.72)" }}>
-                  <span className="font-semibold text-primary-dark">Lead:</span> {current.lead}
-                </p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">Project {current.id}</p>
+                  <h3 className="mt-2 text-2xl font-bold text-primary-dark md:text-3xl">{current.title}</h3>
+                  <p className="mt-2 text-sm font-medium text-accent">Status: {current.status}</p>
+                  <p className="mt-4 text-base leading-relaxed" style={{ color: "rgba(12, 60, 110, 0.72)" }}>
+                    {current.summary}
+                  </p>
 
-                <div className="mt-7 flex flex-wrap items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={goPrev}
-                    className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary/5"
-                  >
-                    Previous
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goNext}
-                    className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white transition hover:bg-primary-dark"
-                  >
-                    Next Project
-                  </button>
-                  <Link
-                    href={current.href}
-                    className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
-                  >
-                    View Project
-                  </Link>
-                </div>
-              </article>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {current.stack.map((chip) => (
+                      <span
+                        key={chip}
+                        className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-primary/80"
+                      >
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="mt-5 text-sm" style={{ color: "rgba(12, 60, 110, 0.72)" }}>
+                    <span className="font-semibold text-primary-dark">Lead:</span> {current.lead}
+                  </p>
+
+                  <div className="mt-8 flex justify-end border-t border-primary/10 pt-5">
+                    <Link
+                      href={current.href}
+                      className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-primary-dark hover:scale-[1.02]"
+                    >
+                      View Project <span aria-hidden>→</span>
+                    </Link>
+                  </div>
+                </article>
+              </div>
 
               <aside className="rounded-3xl border border-primary/10 bg-white/90 p-5 shadow-lg shadow-primary/5">
                 <h3 className="text-lg font-bold text-primary-dark">Project Directory</h3>

@@ -16,20 +16,26 @@ export default function NeuralBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let animationId = 0;
+    let running = true;
     const particles: Particle[] = [];
-    const particleCount = 80;
-    const connectionDistance = 150;
+    const particleCount = 40;
+    const connectionDistance = 140;
+    const connectionDistanceSq = connectionDistance * connectionDistance;
 
     function resize() {
-      if (!canvas) return;
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx!.scale(window.devicePixelRatio, window.devicePixelRatio);
+      if (!canvas || !ctx) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function initParticles() {
@@ -41,51 +47,48 @@ export default function NeuralBackground() {
         particles.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
           radius: Math.random() * 2 + 1,
         });
       }
     }
 
     function animate() {
-      if (!canvas || !ctx) return;
+      if (!canvas || !ctx || !running) return;
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
 
       ctx.clearRect(0, 0, w, h);
 
-      // Update & draw particles
+      ctx.fillStyle = "rgb(252, 190, 95)";
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
-
-        // Wrap around edges
         if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
+        else if (p.x > w) p.x = 0;
         if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
+        else if (p.y > h) p.y = 0;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgb(252, 190, 95)";
         ctx.fill();
       }
 
-      // Draw connections
+      ctx.lineWidth = 0.5;
       for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < connectionDistance) {
-            const opacity = 1 - dist / connectionDistance;
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < connectionDistanceSq) {
+            const opacity = (1 - Math.sqrt(distSq) / connectionDistance) * 0.3;
+            ctx.strokeStyle = `rgba(12, 60, 110, ${opacity})`;
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(12, 60, 110, ${opacity * 0.3})`;
-            ctx.lineWidth = 0.5;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
             ctx.stroke();
           }
         }
@@ -94,18 +97,28 @@ export default function NeuralBackground() {
       animationId = requestAnimationFrame(animate);
     }
 
+    function onVisibility() {
+      if (document.hidden) {
+        running = false;
+        cancelAnimationFrame(animationId);
+      } else if (!running) {
+        running = true;
+        animate();
+      }
+    }
+
     resize();
     initParticles();
-    animate();
+    if (!reduceMotion) animate();
 
-    window.addEventListener("resize", () => {
-      resize();
-      initParticles();
-    });
+    window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
+      running = false;
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
